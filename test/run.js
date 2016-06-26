@@ -135,7 +135,7 @@ test('actions stream passed to run emits actions', function (t) {
   inu.start(app)
 })
 
-test('effects stream will not emit a effect if update returns a null effect', function (t) {
+test('effects stream will not emit an effect if update returns a null effect', function (t) {
   t.plan(1)
   var initialModel = {initial: true }
   var app = {
@@ -160,7 +160,7 @@ test('effects stream will not emit a effect if update returns a null effect', fu
   }))
 })
 
-test('effects stream will not emit a effect if update returns an undefined effect', function (t) {
+test('effects stream will not emit an effect if update returns an undefined effect', function (t) {
   t.plan(1)
   var initialModel = {initial: true }
   var app = {
