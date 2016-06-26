@@ -27,3 +27,26 @@ test('models returned by update are emitted by the model stream', function (t) {
     t.end()
   }))
 })
+
+
+test('model stream will not emit a model if is a duplicate', function (t) {
+  t.plan(1)
+  var initialModel = {initial: true}
+  var app = {
+    init: function () {
+      return {model: initialModel}
+    },
+    update: function (model, action) {
+      return {model: model}
+    },
+    view: function (model, dispatch) {
+      dispatch()
+      return inu.html`<div></div>`
+    }
+  }
+  var sources = inu.start(app)
+
+  pull(sources.models(), pull.drain(function(model) {
+    t.equal(model, initialModel)  
+  }))
+})
