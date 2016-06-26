@@ -135,52 +135,25 @@ test('actions stream passed to run emits actions', function (t) {
   inu.start(app)
 })
 
-test('effects stream will not emit an effect if update returns a null effect', function (t) {
+test('effectsAction stream will not emit an action if run returns an undefined stream', function (t) {
   t.plan(1)
   var initialModel = {initial: true }
   var app = {
     init: function () {
-      return {model: initialModel}
+      return {model: initialModel, effect: true}
     },
     update: function (model, action) {
-      t.ok(model)
-      return {model, effect: null}
+      return {model: model}
     },
     view: function (model, dispatch) {
-      dispatch()
     },
     run: function(effect) {
-      t.error(effect)
+      t.ok(effect)
     }
   }
   var sources = inu.start(app)
 
-  pull(sources.effects(), pull.drain(function(model) {
-    t.error(model)
-  }))
-})
-
-test('effects stream will not emit an effect if update returns an undefined effect', function (t) {
-  t.plan(1)
-  var initialModel = {initial: true }
-  var app = {
-    init: function () {
-      return {model: initialModel}
-    },
-    update: function (model, action) {
-      t.ok(model)
-      return {model, effect: undefined}
-    },
-    view: function (model, dispatch) {
-      dispatch()
-    },
-    run: function(effect) {
-      t.error(effect)
-    }
-  }
-  var sources = inu.start(app)
-
-  pull(sources.effects(), pull.drain(function(model) {
-    t.error(model)
+  pull(sources.effectActionsSources(), pull.drain(function(model) {
+    t.error(true)
   }))
 })
