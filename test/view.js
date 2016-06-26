@@ -42,7 +42,7 @@ test('view stream will not emit a view if view function returns null', function 
   }
   var sources = inu.start(app)
 
-  pull(sources.views(), pull.drain(function(model) {
+  pull(sources.views(), pull.drain(function (model) {
     t.false(model)
   }))
 })
@@ -63,7 +63,7 @@ test('view stream will not emit a view if view function returns undefined', func
   }
   var sources = inu.start(app)
 
-  pull(sources.views(), pull.drain(function(model) {
+  pull(sources.views(), pull.drain(function (model) {
     t.false(model)
   }))
 })

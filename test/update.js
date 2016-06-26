@@ -28,7 +28,6 @@ test('models returned by update are emitted by the model stream', function (t) {
   }))
 })
 
-
 test('model stream will not emit a model if is a duplicate', function (t) {
   t.plan(1)
   var initialModel = {initial: true}
@@ -46,14 +45,14 @@ test('model stream will not emit a model if is a duplicate', function (t) {
   }
   var sources = inu.start(app)
 
-  pull(sources.models(), pull.drain(function(model) {
-    t.equal(model, initialModel)  
+  pull(sources.models(), pull.drain(function (model) {
+    t.equal(model, initialModel)
   }))
-}
+})
 
 test('effects stream will not emit an effect if update returns a null effect', function (t) {
   t.plan(1)
-  var initialModel = {initial: true }
+  var initialModel = {initial: true}
   var app = {
     init: function () {
       return {model: initialModel}
@@ -65,20 +64,20 @@ test('effects stream will not emit an effect if update returns a null effect', f
     view: function (model, dispatch) {
       dispatch()
     },
-    run: function(effect) {
+    run: function (effect) {
       t.error(effect)
     }
   }
   var sources = inu.start(app)
 
-  pull(sources.effects(), pull.drain(function(model) {
+  pull(sources.effects(), pull.drain(function (model) {
     t.error(true)
   }))
 })
 
 test('effects stream will not emit an effect if update returns an undefined effect', function (t) {
   t.plan(1)
-  var initialModel = {initial: true }
+  var initialModel = {initial: true}
   var app = {
     init: function () {
       return {model: initialModel}
@@ -90,14 +89,13 @@ test('effects stream will not emit an effect if update returns an undefined effe
     view: function (model, dispatch) {
       dispatch()
     },
-    run: function(effect) {
+    run: function (effect) {
       t.error(effect)
     }
   }
   var sources = inu.start(app)
 
-  pull(sources.effects(), pull.drain(function(model) {
+  pull(sources.effects(), pull.drain(function (model) {
     t.error(true)
   }))
 })
-)
