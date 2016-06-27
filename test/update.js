@@ -65,13 +65,13 @@ test('effects stream will not emit an effect if update returns a null effect', f
       dispatch()
     },
     run: function (effect) {
-      t.error(effect)
+      t.fail()
     }
   }
   var sources = inu.start(app)
 
   pull(sources.effects(), pull.drain(function (model) {
-    t.error(true)
+    t.fail()
   }))
 })
 
@@ -90,12 +90,12 @@ test('effects stream will not emit an effect if update returns an undefined effe
       dispatch()
     },
     run: function (effect) {
-      t.error(effect)
+      t.fail()
     }
   }
   var sources = inu.start(app)
 
   pull(sources.effects(), pull.drain(function (model) {
-    t.error(true)
+    t.fail()
   }))
 })

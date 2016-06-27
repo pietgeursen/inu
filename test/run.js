@@ -153,6 +153,6 @@ test('effectsAction stream will not emit an action if run returns an undefined s
   var sources = inu.start(app)
 
   pull(sources.effectActionsSources(), pull.drain(function (model) {
-    t.error(true)
+    t.fail()
   }))
 })
